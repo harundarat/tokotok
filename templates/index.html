@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{{url_for('static', filename='slide1.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="{{url_for('static', filename='slide1.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="{{url_for('static', filename='slide1.jpg')}}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+        <h4 class="text-center fw-bold m-4">Produk Terbaru</h4>
+        <div class="row mx-auto">
+          <div class="card mr-2 ml-2" style="width: 16rem;">
+            <img src="{{url_for('static', filename='usb.jpg')}}" class="card-img-top" alt="...">
+            <div class="card-body bg-light">
+              <h5 class="card-title">Kabel USB</h5>
+                <span class="text-warning">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+            </span>
+              <p class="card-text">Kabel USB Terkeren di Dunia dengan fitur transparan.</p>
+              <a href="#" class="btn btn-primary">Detail</a>
+              <a href="#" class="btn btn-danger">Rp. 15000</a>
+            </div>
+          </div>
+        </div>
+      {% endblock %}

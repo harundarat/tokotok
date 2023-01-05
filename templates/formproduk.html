@@ -1,0 +1,137 @@
+{% include 'header.html' %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Form Input Produk</h1>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="admin">Home</a></li>
+            <li class="breadcrumb-item active">Form Input Produk</li>
+          </ol>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Tambah Produk</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form" action="/saveproduk" method="POST">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">ID</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="idproduk"
+                    id="idproduk"
+                    placeholder="Masukan ID produk"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nama Produk</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="namaproduk"
+                    name="namaproduk"
+                    placeholder="Masukan Nama Produk"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Merek</label>
+                  <input
+                    type="text"
+                    name="merekproduk"
+                    class="form-control"
+                    id="merekproduk"
+                    placeholder="Masukan Merek Produk"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Stok Produk</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="stokproduk"
+                    name="stokproduk"
+                    placeholder="Masukan Stok Produk"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Harga Produk</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hargaproduk"
+                    name="hargaproduk"
+                    placeholder="Masukan Harga Produk"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="inputDescription">Deskripsi</label>
+                  <textarea
+                    name="deskripsiproduk"
+                    id="deskripsiproduk"
+                    class="form-control"
+                    rows="4"
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputFile">Input Gambar</label>
+                  <div class="input-group">
+                    <input
+                      type="file"
+                      class="form-control"
+                      id="inputGroupFile02"
+                      name="gambarproduk"
+                    />
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input
+                    name="cekproduk"
+                    type="checkbox"
+                    class="form-check-input"
+                    id="cekproduk"
+                  />
+                  <label class="form-check-label" for="exampleCheck1"
+                    >Apakah Sudah Benar</label
+                  >
+                </div>
+              </div>
+              <!-- /.card-body -->
+
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Tambah</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% include 'footer.html' %}

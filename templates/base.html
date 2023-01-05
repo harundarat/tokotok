@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if judul %}{{judul}} - {% endif %}Tokotok</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+  </head>
+  <body>
+    <script
+      src="https://kit.fontawesome.com/c151f9831d.js"
+      `crossorigin="anonymous"
+    ></script>
+
+    <nav
+      class="navbar navbar-expand-lg bg-info bg-gradient fixed-top p-3 text-white"
+    >
+      <div class="container">
+        <h3 class="mt-2"><i class="fa-solid fa-shop me-2"></i></h3>
+        <a class="navbar-brand fw-bold link-light" href="/">TokoTok</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="d-flex ms-auto" role="search">
+            <input
+              class="form-control me-md-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">Cari</button>
+          </form>
+          <div class="icon mt-2 me-3">
+            <h5>
+              <i class="fa-solid fa-cart-shopping ms-3"></i>
+              <i class="fa-solid fa-envelope ms-3"></i>
+              <i class="fa-solid fa-bell ms-3"></i>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <a
+        class="nav-link active link-light ms-auto me-3"
+        aria-current="page"
+        href="#"
+        >Masuk/Daftar</a
+      >
+    </nav>
+
+    <div class="row mt-md-5 g-0">
+      <div class="col-md-2 bg-light">
+        <div class="list-group list-group-flush p-2 pt-5">
+          <span
+            class="list-group-item bg-info bg-gradient text-white"
+            aria-current="true"
+          >
+            <i class="fas fa-list"></i> MEREK HP
+          </span>
+          <a
+            href="{{url_for('apple')}}"
+            class="list-group-item list-group-item-action"
+          >
+            Apple</a
+          >
+          <a
+            href="{{url_for('oppo')}}"
+            class="list-group-item list-group-item-action"
+          >
+            Oppo</a
+          >
+          <a
+            href="{{url_for('samsung')}}"
+            class="list-group-item list-group-item-action"
+          >
+            Samsung</a
+          >
+          <a
+            href="{{url_for('vivo')}}"
+            class="list-group-item list-group-item-action"
+          >
+            Vivo</a
+          >
+          <a
+            href="{{url_for('xiaomi')}}"
+            class="list-group-item list-group-item-action"
+          >
+            Xiaomi</a
+          >
+        </div>
+      </div>
+      <div class="col-md-10 bg-light mt-md-5">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='js/bootstrap.min.js')}}"
+    ></script>
+  </body>
+</html>
