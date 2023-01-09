@@ -54,16 +54,21 @@
                 </tr>
               </thead>
               <tbody>
-                {% for brng in hapus %}
+                {% for brng in data %}
                 <tr>
                   <td>{{ brng.0 }}</td>
                   <td>{{ brng.1 }}</td>
                   <td>{{ brng.2 }}</td>
                   <td class="text-right py-0 align-middle">
                     <div class="btn-group btn-group-sm">
-                      <a href="#" class="btn btn-danger"
-                        ><i class="fas fa-trash"></i
-                      ></a>
+                      <button
+                        type="submit"
+                        value="{{ brng.0 }}"
+                        action="/hapus"
+                        method="post"
+                      >
+                        hapus
+                      </button>
                     </div>
                   </td>
                 </tr>
