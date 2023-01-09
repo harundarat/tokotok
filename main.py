@@ -1,6 +1,8 @@
+import os
 from flask import Flask,render_template,request,redirect,url_for,flash,session
 from flask_mysqldb import MySQL
 from werkzeug.security import check_password_hash,generate_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask (__name__)
 app.secret_key = "projectakhir"
@@ -11,7 +13,10 @@ app.config['MYSQL_DB'] = 'tokotok'
 mysql = MySQL(app)
 
 @app.route('/')
+@app.route('/index')
 def index():
+    if 'loggedin' in session:
+        flash('Hallo Selamat Datang Admin Silahkan Lengkapi Data Anda')
     return render_template('index.html')
 
 @app.route('/loginadmin',methods=('GET','POST'))
@@ -55,9 +60,11 @@ def saveproduk():
     stok_produk = request.form['stokproduk']
     harga = request.form['hargaproduk']
     deskripsi = request.form['deskripsiproduk']
-    gambar = request.form['gambarproduk']
+    gambar = request.files['file']
+    filename = secure_filename(gambar.filename)
+    gambar.save(os.path.join('static/dist/img/produk', filename))
     cur = mysql.connection.cursor()
-    cur.execute('INSERT INTO produk(id_produk,nama_produk,merek,stok_produk,harga,deskripsi,gambar) VALUES(%s,%s,%s,%s,%s,%s,%s)',(id_produk,nama_produk,merek,stok_produk,harga,deskripsi,gambar))
+    cur.execute('INSERT INTO produk(id_produk,nama_produk,merek,stok_produk,harga,deskripsi) VALUES(%s,%s,%s,%s,%s,%s)',(id_produk,nama_produk,merek,stok_produk,harga,deskripsi))
     mysql.connection.commit()
     cur.close()
     return redirect(url_for('dataproduk'))
@@ -66,10 +73,19 @@ def saveproduk():
 @app.route('/hapusproduk', methods=['GET','POST'])
 def hapusproduk():
     cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM produk WHERE id_produk=%s")
+    cur.execute("SELECT * FROM produk")
     produk = cur.fetchall()
     cur.close()
-    return render_template('hapusproduk.html',menu = 'master',submenu = 'formproduk', hapus=produk)
+    return render_template('hapusproduk.html',menu = 'master',submenu = 'formproduk', data=produk )
+
+@app.route('/hapus', methods=['GET','POST'])
+def hapus():
+    cur = mysql.connection.cursor()
+    produk = cur.fetchall()
+    cur.execute("DELETE FROM produk WHERE id_produk")
+    mysql.connection.commit()
+    return redirect('hapusproduk.html',data=produk )
+    
 
 @app.route('/datapengguna')
 def datapengguna():
@@ -83,6 +99,53 @@ def datatransaksi():
 def about():
     return render_template('about.html',menu = 'about',submenu = 'tentang')
 
+
+#           HALAMAN USER       
+@app.route('/loginuser',methods=['GET','POST'])
+def loginuser():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+    # cek username 
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM pelanggan WHERE username=%s',(username,))
+        akun = cursor.fetchone()
+        if akun is None :
+            flash('Login gagal, Silahkan cek Username / Password anda!!!')
+        else:
+            session['loggedin'] = True
+            session['email'] = akun[2]
+            session['alamat'] = akun[3]
+            session['notelp'] = akun[4]
+            return redirect(url_for('index'))
+    return render_template('loginuser.html')
+    
+@app.route('/daftaruser', methods=['GET','POST'])
+def daftaruser():
+    if request.method=='POST':
+        nama = request.form['nama']
+        username = request.form['username']
+        email = request.form['email']
+        alamat = request.form['alamat']
+        notelp = request.form['nomor']
+        password = request.form['password']
+        
+        # cek username / email
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM pelanggan WHERE username=%s OR email=%s',(username,email,))
+        akun = cursor.fetchone()
+        if akun is None:
+            cursor.execute('INSERT INTO pelanggan VALUES (%s,%s,%s,%s,%s,%s)',(nama,username,email,alamat,notelp,generate_password_hash(password)))
+            mysql.connection.commit()
+            flash('Daftar Telah Berhasil,Silahkan untuk Login')
+        else :
+            flash('Username atau email sudah ada')
+    return render_template('daftaruser.html')
+    
+@app.route('/detailproduk')
+def detailproduk():
+    return render_template('detailproduk.html')
 
 @app.route('/produk/apple/')    
 def apple():

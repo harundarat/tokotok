@@ -34,7 +34,12 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="/saveproduk" method="POST">
+            <form
+              role="form"
+              action="/saveproduk"
+              method="POST"
+              enctype="multipart/form-data"
+            >
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID</label>
@@ -95,18 +100,9 @@
                     rows="4"
                   ></textarea>
                 </div>
-
                 <div class="form-group">
-                  <label for="exampleInputFile">Input Gambar</label>
-                  <div class="input-group">
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="inputGroupFile02"
-                      name="gambarproduk"
-                    />
-                  </div>
-                </div>
+                  <input type="file" name="file" />
+                  <input type="submit" value="Upload" />
                 <div class="form-check">
                   <input
                     name="cekproduk"
